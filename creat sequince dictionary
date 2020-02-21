@@ -1,12 +1,10 @@
-key=[]
-value=[]
-with open (fasta, "r") as file:
+seq_dict_2 = {}
+with open(fasta, 'r') as file:
     for lines in file:
-        if not lines.startswith(">"):
-            key.append(lines.split('.')[0])
+        if lines.startswith('>'):
+            header = lines.strip()
         else:
-            value.append(lines)
-
-
-dictionary = dict(zip(key, value))
-print(dictionary)
+            seq = lines.strip()
+            seq_dict_2[header] = seq
+            
+print(seq_dict_2)
