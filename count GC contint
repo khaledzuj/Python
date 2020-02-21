@@ -1,0 +1,13 @@
+with open(fasta, 'r') as file:
+    for lines in file:
+        if lines.startswith('>'):
+            name=lines.split(".")[0].strip('>')
+            
+        else:
+            G_contint=lines.count("G")
+            C_contint=lines.count("C")
+            total=len(lines)
+            GC= int(((G_contint+C_contint)/total)*100)
+            print(name,GC,"%")
+            count+=1
+print(count)      
