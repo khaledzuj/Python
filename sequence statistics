@@ -1,0 +1,10 @@
+total=[]
+with open(fasta, 'r') as file:
+    for lines in file:
+        if not lines.startswith('>'):
+            length=len(lines)
+            total.append(length)
+average= numpy.mean(total)
+median=numpy.median(total)
+standerd_deviation=numpy.std(total)
+print(average,median,standerd_deviation)
