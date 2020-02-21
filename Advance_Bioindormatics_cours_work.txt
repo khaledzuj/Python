@@ -1,0 +1,23 @@
+def translate(data):
+    genetic_code={'ATT':'I','ATC':'I','ATA':'I','CTT':'L','CTC':'L','CTA':'L','CTG':'L','TTA':'L','TTG':'L','GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A','GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V','TTC':'F', 'TTT':'F','ATG':'M','TGC':'C', 'TGT':'C','GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G','CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P','ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T','AGC':'S', 'AGT':'S', 'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S','TAC':'Y', 'TAT':'Y','TGG':'W','CAA':'Q', 'CAG':'Q','AAC':'N', 'AAT':'N','CAC':'H', 'CAT':'H','GAA':'E', 'GAG':'E','GAC':'D', 'GAT':'D','AAA':'K', 'AAG':'K','AGA':'R', 'AGG':'R', 'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R','TAA':'_','TAG':'_', 'TGA':''}
+    protien_seq=""
+    for i in data:
+        for x in range(0, len(data)-(3+len(data)%3),3):
+            protien_seq+=genetic_code[data[x:x+3]]
+    return protien_seq
+
+with open(fasta, 'r') as data:
+    for lines in data:
+        if not lines.startswith('>'):
+            protien_seq=translate(lines[lines.find("ATG"):])
+  
+k= 1000 
+possiple_gene=[]
+for i in range(len(protien_seq)-k+500):
+    gene=protien_seq[i:i+k].split("_")
+    for x in gene:
+        if x.startswith('M') and len(gene)>=120 and len(gene)<=150:
+            target_gene=x
+            if target_gene.count("S")>=6 |target_gene.count("S") <=9:
+                possiple_gene.append(gene)
+print(possiple_gene)
