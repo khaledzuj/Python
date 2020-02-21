@@ -1,0 +1,5 @@
+count=0
+sorted_list= sorted(list)
+for x in sorted_list:
+    count=count+1 
+    print(x,count)
